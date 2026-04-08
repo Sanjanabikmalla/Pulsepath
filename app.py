@@ -38,6 +38,10 @@ def get_state():
     # Hackathon spec: /state endpoint
     return {"state": env.state}
 
+def main():
+    # Entrypoint for the openenv validator's [project.scripts] server hook
+    import uvicorn
+    uvicorn.run("app:app", host="0.0.0.0", port=7860)
+
 if __name__ == "__main__":
-    # Hugging Face Spaces strictly run on port 7860
-    uvicorn.run(app, host="0.0.0.0", port=7860)
+    main()

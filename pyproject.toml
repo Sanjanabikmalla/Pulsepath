@@ -10,9 +10,13 @@ authors = [
     { name="Hackathon Participant" }
 ]
 dependencies = [
+    "openenv-core>=0.2.0",
     "openai",
     "numpy",
     "fastapi",
     "uvicorn",
     "pydantic"
 ]
+
+[project.scripts]
+server = "app:main"
