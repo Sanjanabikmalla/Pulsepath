@@ -1,0 +1,13 @@
+name: pulsepath-emergency-dispatch
+description: RL environment for autonomous emergency ambulance dispatch.
+entrypoint: ambulance_env:AmbulanceDispatchEnv
+dependencies:
+  - numpy
+  - openai
+tasks:
+  - id: task_1_basic_dispatch
+    description: Dispatch nearest ambulance to a single emergency.
+  - id: task_2_triage_dilemma
+    description: Prioritize high-severity emergencies over low-severity ones.
+  - id: task_3_fleet_management
+    description: Manage multiple ambulances for a constant stream of emergencies.
