@@ -16,5 +16,5 @@ COPY --chown=user . $HOME/app
 # Install the required packages
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-# This is the command the Hackathon Judges' framework will run!
-CMD ["python", "inference.py"]
+# This runs your script, and then keeps the container alive so Hugging Face doesn't crash!
+CMD ["sh", "-c", "python inference.py && tail -f /dev/null"]
