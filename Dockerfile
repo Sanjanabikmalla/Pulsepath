@@ -14,7 +14,8 @@ WORKDIR $HOME/app
 COPY --chown=user . $HOME/app
 
 # Install the required packages
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+# Forcibly install all required packages to prevent missing requirements errors
+RUN pip install --no-cache-dir fastapi uvicorn pydantic openai numpy
 
-# Start the FastAPI server on port 7860 (Hugging Face standard)
-CMD ["python", "app.py"]
+# Standard Hugging Face FastAPI execution method
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
