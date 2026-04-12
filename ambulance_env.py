@@ -93,9 +93,8 @@ class AmbulanceDispatchEnv:
         if self.current_step >= self.max_steps:
             done = True
             
-        # TEMPORARY DEBUG: Force reward strictly to 0.5 to bypass ANY integer / boundary parsing
-        reward = 0.5
-        return self.state, float(reward), done, {}
+        clamped_reward = max(0.001, min(0.999, float(reward)))
+        return self.state, clamped_reward, done, {}
 
     def evaluate_task(self):
         score = 0.01  # Safe default fallback
@@ -141,8 +140,10 @@ class AmbulanceDispatchEnv:
             score = 0.01
 
         # Strict clamping to enforce (0, 1) exclusively per rules
-        # TEMPORARY DEBUG: Forcing a constant 0.5 to bypass validation bugs
-        score = 0.5
+        try:
+            score = float(score)
+        except (ValueError, TypeError):
+            score = 0.01
 
-        print(f"[DEBUG] Task: {self.task_id}, Score: {score}")
-        return score
+        clamped_score = max(0.001, min(0.999, score))
+        return clamped_score

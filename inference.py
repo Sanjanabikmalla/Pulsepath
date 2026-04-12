@@ -71,14 +71,13 @@ def run_inference():
             state, reward, done, info = env.step(action_dict)
             total_reward += reward
             
-            # TEMPORARY DEBUG: Forcing reward string purely to 0.5
-            reward = 0.5
-            print(f"[STEP] {json.dumps({'step': step_count, 'action': json.dumps(action_dict), 'reward': reward})}")
+            clamped_reward = max(0.001, min(0.999, float(reward)))
+            print(f"[STEP] {json.dumps({'step': step_count, 'action': json.dumps(action_dict), 'reward': round(clamped_reward, 3)})}")
             
         
-        # TEMPORARY DEBUG: Forcing a constant 0.5 score
-        final_score = 0.5
-        print(f"[END] {json.dumps({'task_id': task_id, 'score': final_score})}")
+        raw_score = env.evaluate_task()
+        final_score = max(0.001, min(0.999, float(raw_score)))
+        print(f"[END] {json.dumps({'task_id': task_id, 'score': round(final_score, 3)})}")
 
 if __name__ == "__main__":
     run_inference()
