@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pulsepath"
+version = "0.1.0"
+description = "PulsePath Ambulance Dispatch Environment"
+authors = [
+    { name="Hackathon Participant" }
+]
+dependencies = [
+    "openenv-core>=0.2.0",
+    "openai",
+    "numpy",
+    "fastapi",
+    "uvicorn",
+    "pydantic"
+]
+
+[project.scripts]
+server = "server.app:main"
