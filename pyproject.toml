@@ -15,7 +15,9 @@ dependencies = [
     "numpy",
     "fastapi",
     "uvicorn",
-    "pydantic"
+    "pydantic",
+    "requests",
+    "httpx"
 ]
 
 [project.scripts]
